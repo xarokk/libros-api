@@ -1,0 +1,23 @@
+drop database if exists librosdb;
+create database librosdb;
+ 
+use librosdb;
+ 
+create table libros (
+    libroid		int not null primary key auto_increment,
+	titulo		varchar(70) not null,
+	autor		varchar(255) not null,
+	lengua		varchar(255) not null,
+	edicion		varchar(255) ,
+	editorial	varchar(255) ,
+	fecha		timestamp
+);
+ 
+create table reviews (
+	libroid 			int not null ,
+	username 			varchar(20) not null,
+	reviewid				varchar(100) not null
+	
+	foreign key(libroid) references libros(libroid)
+	foreign key(username) references users(username)
+);

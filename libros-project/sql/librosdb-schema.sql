@@ -1,0 +1,34 @@
+drop database if exists librosdb;
+create database librosdb;
+ 
+use librosdb;
+ 
+create table libros (
+    libroid		int not null primary key auto_increment,
+	titulo		varchar(70) not null,
+	autor		varchar(255) not null,
+	lengua		varchar(255) not null,
+	edicion		varchar(255) ,
+	editorial	varchar(255) ,
+	fecha		timestamp
+);
+ 
+create table users (
+    username	varchar(20) not null primary key,
+	name		varchar(70) not null,
+	email		varchar(255) not null
+);
+ 
+
+create table reviews (
+	reviewid			int not null auto_increment unique,
+	libroid 			int not null ,
+	username 			varchar(20) not null,
+	summary				varchar(255),
+	
+	
+	foreign key(username) references users (username) on delete cascade,
+	foreign key(libroid) references libros (libroid) on delete cascade,
+	primary key (libroid, username)
+
+);
